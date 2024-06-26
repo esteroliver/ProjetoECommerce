@@ -103,9 +103,17 @@ public class CompraService {
         return compra;
     }
     public CompraDTO finalizarCompra(CompraDTO compra){
-        Compra compra_finalizada = new Compra();
-        BeanUtils.copyProperties(compra, compra_finalizada);
-        repository.delete(compra_finalizada);
+        Optional<Compra> compra_01 = repository.findById(compra.getId());
+        if(compra_01.isEmpty()){
+            throw new RuntimeException("Compra não foi encontrada.");
+        }
+        Compra compra_02 = compra_01.get();
+        Compra compra_03 = new Compra();
+        BeanUtils.copyProperties(compra, compra_03);
+        if(compra_02 == compra_03)
+            repository.delete(compra_02);
+        else
+            throw new RuntimeException("Compras são incompatíveis.");
         return compra;
     } //esse método vai ser usado pelo serviço Pedido
 }
