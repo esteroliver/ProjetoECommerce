@@ -1,26 +1,24 @@
 package com.example.produtos.model;
 
-import java.util.UUID;
-
 public class ProdutosDTO {
-    private UUID id;
+    private Long id;
     private Double valor;
     private String nome;
     private Integer quantidade;
     private String descricao;
     public ProdutosDTO() {
     }
-    public ProdutosDTO(UUID id, Double valor, String nome, Integer quantidade, String descricao) {
+    public ProdutosDTO(Long id, Double valor, String nome, Integer quantidade, String descricao) {
         this.id = id;
         this.valor = valor;
         this.nome = nome;
         this.quantidade = quantidade;
         this.descricao = descricao;
     }
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Double getValor() {

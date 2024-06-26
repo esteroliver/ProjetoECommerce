@@ -3,7 +3,6 @@ package com.example.produtos.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class ProdutosService {
     @Autowired
     private ProdutosRepository repository;
 
-    public Optional<ProdutosDTO> encontrarProduto(UUID id){
+    public Optional<ProdutosDTO> encontrarProduto(Long id){
         Optional<Produtos> prod_01 = repository.findById(id);
         if(prod_01.isEmpty()){
             throw new RuntimeException("Produto não existe.");
@@ -60,5 +59,15 @@ public class ProdutosService {
         Produtos prod_02 = prod_01.get();
         repository.delete(prod_02);
         return Optional.of(prod);
+    }
+
+    public List<ProdutosDTO> produtosDisponiveis(){
+        List<Produtos> prods_01 = new ArrayList<>();
+        for (Produtos p : repository.findAll()) {
+            if(p.getQuantidade() > 0) prods_01.add(p);
+        }
+        List<ProdutosDTO> prods_02 = new ArrayList<>();
+        BeanUtils.copyProperties(prods_01, prods_02);
+        return prods_02;
     }
 }

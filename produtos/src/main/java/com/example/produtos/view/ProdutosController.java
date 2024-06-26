@@ -3,7 +3,6 @@ package com.example.produtos.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
 @RestController
 @RequestMapping("/produtos")
 public class ProdutosController {
@@ -42,7 +38,7 @@ public class ProdutosController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<ProdutosResponse>> encontrarProduto(@PathVariable UUID id) {
+    public ResponseEntity<Optional<ProdutosResponse>> encontrarProduto(@PathVariable Long id) {
         Optional<ProdutosDTO> prod = service.encontrarProduto(id);
         ProdutosResponse prod_response = new ProdutosResponse();
         BeanUtils.copyProperties(prod, prod_response);
@@ -79,5 +75,12 @@ public class ProdutosController {
         return new ResponseEntity<>(Optional.of(produto_response), HttpStatus.ACCEPTED);
     }
     
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<ProdutosResponse>> produtosDisponiveis() {
+        List<ProdutosDTO> produtos = service.listarProdutos();
+        List<ProdutosResponse> produtos_response = new ArrayList<>();
+        BeanUtils.copyProperties(produtos, produtos_response);
+        return new ResponseEntity<>(produtos_response, HttpStatus.OK);
+    }
     
 }

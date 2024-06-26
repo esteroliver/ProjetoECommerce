@@ -1,33 +1,17 @@
-package com.example.produtos.model;
+package com.example.compras.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity(name = "produtos")
-public class Produtos {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ProdutosResponse {
     private Double valor;
     private String nome;
     private Integer quantidade;
     private String descricao;
-    public Produtos() {
+    public ProdutosResponse() {
     }
-    public Produtos(Long id, Double valor, String nome, Integer quantidade, String descricao) {
-        this.id = id;
+    public ProdutosResponse(Double valor, String nome, Integer quantidade, String descricao) {
         this.valor = valor;
         this.nome = nome;
         this.quantidade = quantidade;
         this.descricao = descricao;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
     public Double getValor() {
         return valor;
@@ -53,4 +37,5 @@ public class Produtos {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
 }
