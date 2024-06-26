@@ -1,18 +1,21 @@
 package com.example.produtos.model;
 
 public class ProdutosResponse {
+    private Long id;
     private Double valor;
     private String nome;
     private Integer quantidade;
     private String descricao;
     public ProdutosResponse() {
     }
-    public ProdutosResponse(Double valor, String nome, Integer quantidade, String descricao) {
+    public ProdutosResponse(Long id, Double valor, String nome, Integer quantidade, String descricao) {
+        this.id = id;
         this.valor = valor;
         this.nome = nome;
         this.quantidade = quantidade;
         this.descricao = descricao;
     }
+
     public Double getValor() {
         return valor;
     }
@@ -37,5 +40,10 @@ public class ProdutosResponse {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

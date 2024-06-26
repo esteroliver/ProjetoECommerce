@@ -57,7 +57,12 @@ public class ProdutosService {
             throw new RuntimeException("Produto não existe.");
         }
         Produtos prod_02 = prod_01.get();
-        repository.delete(prod_02);
+        Produtos prod_03 = new Produtos();
+        BeanUtils.copyProperties(prod, prod_03); 
+        if(prod_02 == prod_03)
+            repository.delete(prod_02);
+        else 
+            throw new RuntimeException("Produtos incompatíveis.");
         return Optional.of(prod);
     }
 
